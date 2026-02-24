@@ -4,14 +4,14 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/service-name:$COMMIT_SHA'
+      - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/strengthen-site:$COMMIT_SHA'
       - '.'
 
   # Push to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/service-name:$COMMIT_SHA'
+      - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/strengthen-site:$COMMIT_SHA'
 
   # Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -19,15 +19,15 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'service-name'
+      - 'strengthen-site'
       - '--image'
-      - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/service-name:$COMMIT_SHA'
+      - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/strengthen-site:$COMMIT_SHA'
       - '--region'
       - 'africa-south1'
       - '--quiet'
 
 images:
-  - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/service-name:$COMMIT_SHA'
+  - 'africa-south1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/strengthen-site:$COMMIT_SHA'
 
 options:
   logging: CLOUD_LOGGING_ONLY
