@@ -1,7 +1,6 @@
 steps:
   # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    dir: SGP
     args:
       - 'build'
       - '-t'
