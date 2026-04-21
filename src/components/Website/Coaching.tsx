@@ -1,14 +1,4 @@
 import { CheckCircle2, Users } from 'lucide-react'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from '@/components/ShadUI/card'
-import { Badge } from '@/components/ShadUI/badge'
-import { Button } from '@/components/ShadUI/button'
 import { Separator } from '@/components/ShadUI/separator'
 
 const tiers = [
@@ -25,7 +15,6 @@ const tiers = [
       'Community Discord',
     ],
     cta: 'Join Free',
-    variant: 'outline' as const,
     highlight: false,
   },
   {
@@ -42,7 +31,6 @@ const tiers = [
       'Direct message support',
     ],
     cta: 'Start Pro',
-    variant: 'default' as const,
     highlight: true,
   },
   {
@@ -60,24 +48,24 @@ const tiers = [
       'Priority response SLA',
     ],
     cta: 'Apply for Elite',
-    variant: 'outline' as const,
     highlight: false,
   },
 ]
 
 export function Coaching() {
   return (
-    <section id="coaching" className="py-24 bg-muted/20 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="coaching" className="py-24 px-6 md:px-12 bg-[#eceef0]">
+      <div className="max-w-7xl mx-auto">
+
         <div className="text-center mb-14">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Users className="h-4 w-4 text-blue-400" />
-            <span className="text-sm font-medium text-blue-400 uppercase tracking-widest">
-              Coaching
-            </span>
+            <Users className="h-4 w-4 text-primary" />
+            <span className="text-xs font-bold text-primary uppercase tracking-widest">Coaching</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Work With Me</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+          <h2 className="text-3xl md:text-5xl font-headline font-extrabold text-[#191c1e] mb-4">
+            Work With Me
+          </h2>
+          <p className="text-[#41484e] max-w-xl mx-auto text-lg">
             Choose the level of support that fits where you are. Every plan
             includes access to the full Strengthen ecosystem.
           </p>
@@ -85,48 +73,64 @@ export function Coaching() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {tiers.map((tier) => (
-            <Card
+            <div
               key={tier.name}
-              className={
-                tier.highlight ? 'ring-2 ring-primary relative' : 'relative'
-              }
+              className={`relative rounded-[1.25rem] p-7 flex flex-col gap-5 ${
+                tier.highlight
+                  ? 'neomorph-primary-btn'
+                  : 'neomorph-extruded bg-white'
+              }`}
             >
               {tier.highlight && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <Badge className="px-4 py-1">Most Popular</Badge>
+                  <span className="neomorph-extruded bg-white px-4 py-1 rounded-full text-xs font-bold text-primary whitespace-nowrap">
+                    Most Popular
+                  </span>
                 </div>
               )}
-              <CardHeader>
-                <CardTitle className="text-lg">{tier.name}</CardTitle>
-                <div className="flex items-baseline gap-0.5 mt-1 mb-1">
-                  <span className="text-3xl font-bold">{tier.price}</span>
+              <div>
+                <h3 className={`font-headline font-bold text-lg mb-1 ${tier.highlight ? 'text-white' : 'text-[#191c1e]'}`}>
+                  {tier.name}
+                </h3>
+                <div className="flex items-baseline gap-0.5 mb-2">
+                  <span className={`text-3xl font-headline font-extrabold ${tier.highlight ? 'text-white' : 'text-[#191c1e]'}`}>
+                    {tier.price}
+                  </span>
                   {tier.period && (
-                    <span className="text-muted-foreground text-sm">
+                    <span className={`text-sm ${tier.highlight ? 'text-white/70' : 'text-[#41484e]'}`}>
                       {tier.period}
                     </span>
                   )}
                 </div>
-                <CardDescription>{tier.description}</CardDescription>
-              </CardHeader>
-              <Separator />
-              <CardContent className="pt-6">
-                <ul className="space-y-3">
-                  {tier.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2.5 text-sm">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-              <CardFooter className="pt-2">
-                <Button variant={tier.variant} className="w-full">
-                  {tier.cta}
-                </Button>
-              </CardFooter>
-            </Card>
+                <p className={`text-sm leading-relaxed ${tier.highlight ? 'text-white/80' : 'text-[#41484e]'}`}>
+                  {tier.description}
+                </p>
+              </div>
+
+              <Separator className={tier.highlight ? 'bg-white/20' : ''} />
+
+              <ul className="space-y-3 flex-1">
+                {tier.features.map((feat) => (
+                  <li key={feat} className="flex items-start gap-2.5 text-sm">
+                    <CheckCircle2 className={`h-4 w-4 shrink-0 mt-0.5 ${tier.highlight ? 'text-white/70' : 'text-primary'}`} />
+                    <span className={tier.highlight ? 'text-white/90' : 'text-[#41484e]'}>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                className={`w-full py-3.5 rounded-full font-bold text-sm transition-all active:scale-95 ${
+                  tier.highlight
+                    ? 'bg-white text-primary hover:bg-white/90'
+                    : 'neomorph-primary-btn text-white'
+                }`}
+              >
+                {tier.cta}
+              </button>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   )

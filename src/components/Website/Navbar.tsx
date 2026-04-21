@@ -1,5 +1,4 @@
 import { ZapIcon, MenuIcon } from 'lucide-react'
-import { Button } from '@/components/ShadUI/button'
 import { Separator } from '@/components/ShadUI/separator'
 import {
   Sheet,
@@ -18,11 +17,11 @@ const navLinks = [
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 w-full glass-nav border-b border-[#c0c7cf]/30">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 font-bold text-xl shrink-0">
-          <ZapIcon className="w-5 h-5 text-blue-400" />
+        <a href="#" className="flex items-center gap-2 font-headline font-extrabold text-xl text-primary shrink-0">
+          <ZapIcon className="w-5 h-5 text-primary" />
           <span>Strengthen</span>
         </a>
 
@@ -32,7 +31,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
+              className="px-4 py-2 text-sm font-semibold text-[#41484e] hover:text-primary transition-colors rounded-full hover:bg-[#eceef0]"
             >
               {link.label}
             </a>
@@ -40,40 +39,48 @@ export function Navbar() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-2 shrink-0">
-          <Button variant="ghost" size="sm">Sign In</Button>
-          <Button size="sm">Get Started</Button>
+        <div className="hidden md:flex items-center gap-3 shrink-0">
+          <a href="#" className="px-4 py-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
+            Sign In
+          </a>
+          <button className="neomorph-primary-btn px-6 py-2.5 rounded-full text-white font-bold text-sm transition-all active:scale-95">
+            Get Started
+          </button>
         </div>
 
         {/* Mobile menu */}
         <Sheet>
-          <SheetTrigger className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
+          <SheetTrigger className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-full neomorph-extruded text-primary">
             <MenuIcon className="h-5 w-5" />
             <span className="sr-only">Open menu</span>
           </SheetTrigger>
-          <SheetContent side="right">
+          <SheetContent side="right" className="bg-[#eceef0]">
             <SheetHeader>
-              <SheetTitle className="flex items-center gap-2">
-                <ZapIcon className="w-4 h-4 text-blue-400" />
+              <SheetTitle className="flex items-center gap-2 font-headline text-primary">
+                <ZapIcon className="w-4 h-4 text-primary" />
                 Strengthen
               </SheetTitle>
             </SheetHeader>
-            <Separator />
-            <nav className="flex flex-col px-4 py-2 gap-1">
+            <Separator className="my-4" />
+            <nav className="flex flex-col px-4 gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
+                  className="px-4 py-3 text-sm font-semibold text-[#41484e] hover:text-primary transition-colors rounded-full hover:bg-white/70"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
-            <Separator />
-            <div className="px-4 py-4 flex flex-col gap-2">
-              <Button variant="outline" className="w-full">Sign In</Button>
-              <Button className="w-full">Get Started</Button>
+            <Separator className="my-4" />
+            <div className="px-4 flex flex-col gap-3">
+              <button className="w-full py-3 rounded-full border border-primary/30 text-primary font-bold text-sm">
+                Sign In
+              </button>
+              <button className="neomorph-primary-btn w-full py-3 rounded-full text-white font-bold text-sm transition-all active:scale-95">
+                Get Started
+              </button>
             </div>
           </SheetContent>
         </Sheet>
